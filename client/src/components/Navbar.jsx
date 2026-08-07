@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { Menu, X, LogIn, LayoutDashboard } from 'lucide-react'
+import { supabase } from '../lib/supabase.js'
 import './Navbar.css'
 
 const LINKS = [
@@ -26,8 +27,23 @@ export default function Navbar() {
 
   useEffect(() => {
     setOpen(false)
-    setLoggedIn(!!localStorage.getItem('tezgrid_user'))
   }, [location.pathname])
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setLoggedIn(!!session)
+      if (session) localStorage.setItem('tezgrid_user', session.user.email)
+      else localStorage.removeItem('tezgrid_user')
+    })
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setLoggedIn(!!session)
+      if (session) localStorage.setItem('tezgrid_user', session.user.email)
+      else localStorage.removeItem('tezgrid_user')
+    })
+
+    return () => listener.subscription.unsubscribe()
+  }, [])
 
   return (
     <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
