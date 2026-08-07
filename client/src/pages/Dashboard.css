@@ -327,6 +327,15 @@
   background: rgba(99, 102, 241, 0.06);
 }
 
+.dash-field input:-webkit-autofill,
+.dash-field input:-webkit-autofill:hover,
+.dash-field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text);
+  -webkit-box-shadow: 0 0 0 1000px #12141c inset;
+  box-shadow: 0 0 0 1000px #12141c inset;
+  transition: background-color 999999s ease-in-out 0s;
+}
+
 .dash-field input:disabled {
   color: var(--text-dim);
   background: rgba(255, 255, 255, 0.015);
