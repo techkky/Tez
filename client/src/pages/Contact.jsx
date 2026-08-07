@@ -1,18 +1,15 @@
 import { useState } from 'react'
 import {
   Mail,
-  Phone,
   MapPin,
   Clock,
   Send,
   CheckCircle2,
   AlertCircle,
+  Globe,
+  Smartphone,
   Server,
-  Database,
-  HardDrive,
-  Cpu,
-  ShieldCheck,
-  Layers,
+  MessagesSquare,
   MessageCircleQuestion,
 } from 'lucide-react'
 import Reveal from '../components/Reveal.jsx'
@@ -20,12 +17,10 @@ import Select from '../components/Select.jsx'
 import './Contact.css'
 
 const SERVICE_OPTIONS = [
-  { value: 'Cloud Hosting', icon: Server },
-  { value: 'Managed Databases', icon: Database },
-  { value: 'Cloud Storage', icon: HardDrive },
-  { value: 'Dedicated Cloud Servers', icon: Cpu },
-  { value: 'Security & Compliance', icon: ShieldCheck },
-  { value: 'Full subscription package', icon: Layers },
+  { value: 'Website Development', icon: Globe },
+  { value: 'Mobile App Development', icon: Smartphone },
+  { value: 'Cloud Hosting & Infrastructure', icon: Server },
+  { value: 'IT Consulting', icon: MessagesSquare },
   { value: 'Something else', icon: MessageCircleQuestion },
 ].map((o) => ({ ...o, label: o.value }))
 
@@ -69,24 +64,17 @@ export default function Contact() {
       <div className="container contact__grid">
         <Reveal className="contact__info">
           <span className="eyebrow">Contact</span>
-          <h1>Let's design your cloud stack</h1>
+          <h1>Let's figure out the right fit</h1>
           <p>
-            Tell us what you're building and what it needs — we'll come back with a subscription
-            plan that covers hosting, database, storage, servers and security.
+            Tell us what you're building — a custom project, a hosting subscription, or just a
+            problem you need help solving — and we'll come back with a plan.
           </p>
 
           <div className="contact__detail">
             <Mail size={18} />
             <div>
               <strong>Email</strong>
-              <span>hello@tezgrid.com</span>
-            </div>
-          </div>
-          <div className="contact__detail">
-            <Phone size={18} />
-            <div>
-              <strong>Phone</strong>
-              <span>+91 00000 00000</span>
+              <span>tezgrid@gmail.com</span>
             </div>
           </div>
           <div className="contact__detail">
@@ -143,13 +131,13 @@ export default function Contact() {
               />
 
               <label>
-                Tell us about your app
+                Tell us what you need
                 <textarea
                   required
                   rows={5}
                   value={form.message}
                   onChange={update('message')}
-                  placeholder="What are you building, expected traffic, and any requirements we should know about."
+                  placeholder="What are you building or trying to solve, and any requirements we should know about."
                 />
               </label>
 

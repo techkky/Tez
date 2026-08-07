@@ -114,6 +114,47 @@
   color: transparent !important;
 }
 
+.products-callout {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 30px 36px;
+}
+
+.products-callout__icon {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: var(--gradient-soft);
+  color: var(--cyan);
+}
+
+.products-callout__body {
+  flex: 1;
+}
+
+.products-callout__body h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.products-callout__body p {
+  color: var(--text-muted);
+  font-size: 14.5px;
+}
+
+@media (max-width: 640px) {
+  .products-callout {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 24px;
+  }
+}
+
 @media (max-width: 780px) {
   .service-row {
     grid-template-columns: 1fr;

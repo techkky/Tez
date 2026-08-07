@@ -1,36 +1,54 @@
 import { NavLink } from 'react-router-dom'
-import { ArrowRight, Target, Wallet, ShieldCheck, Headset, Gauge, Layers } from 'lucide-react'
+import { ArrowRight, Target, Handshake, ShieldCheck, Headset, Layers, Boxes, Code2, MessagesSquare } from 'lucide-react'
 import Reveal from '../components/Reveal.jsx'
 import './About.css'
 
 const VALUES = [
   {
     icon: Target,
-    title: 'Reliability first',
-    desc: 'Uptime and data safety are non-negotiable — every plan is built on redundant, monitored infrastructure.',
+    title: 'Requirement first',
+    desc: 'We scope around what your business actually needs before we talk technology or timelines.',
   },
   {
-    icon: Wallet,
-    title: 'Transparent pricing',
-    desc: 'One monthly number that covers hosting, database, storage and security. No surprise line items.',
+    icon: Handshake,
+    title: 'Transparent scoping',
+    desc: 'Custom projects get a clear quote before work starts. Every subscription gets clear terms. No surprise line items.',
   },
   {
     icon: ShieldCheck,
     title: 'Security by default',
-    desc: 'Firewalls, SSL and access control ship with every plan, not sold back to you as an upgrade.',
+    desc: 'Access control, backups and secure hosting ship with every build and every subscription.',
   },
   {
     icon: Headset,
     title: 'A team, not a ticket queue',
-    desc: 'You reach engineers who know your setup, not a rotating helpdesk reading from a script.',
+    desc: 'You reach people who know your project — for a client build, a hosting subscription, or a consulting call.',
   },
 ]
 
 const STATS = [
-  { value: '150+', label: 'Applications managed' },
-  { value: '99.9%', label: 'Average uptime delivered' },
-  { value: '<15 min', label: 'Average support response' },
-  { value: '24/7', label: 'Infrastructure monitoring' },
+  { value: '3', label: 'Core service lines' },
+  { value: '24/7', label: 'Support & consulting' },
+  { value: '1', label: 'Accountable team' },
+  { value: '100%', label: 'Requirement-first builds' },
+]
+
+const PILLARS = [
+  {
+    icon: Code2,
+    title: 'Custom development',
+    desc: 'Websites, mobile apps and the cloud hosting behind them, built for one client at a time.',
+  },
+  {
+    icon: Boxes,
+    title: 'Our own products',
+    desc: 'Software we build, run and support ourselves, sold on subscription.',
+  },
+  {
+    icon: MessagesSquare,
+    title: 'Consulting',
+    desc: 'Helping clients figure out the right software approach before a single line of code is written.',
+  },
 ]
 
 export default function About() {
@@ -39,14 +57,15 @@ export default function About() {
       <section className="section section--tight about-hero">
         <div className="container">
           <Reveal className="section-head">
-            <span className="eyebrow">About TezGrid</span>
+            <span className="eyebrow">About TezGrid Associates</span>
             <h1>
-              Cloud infrastructure, <span className="gradient-text">handled properly</span>
+              IT services, products and consulting, <span className="gradient-text">under one roof</span>
             </h1>
             <p>
-              TezGrid exists because most teams shouldn't have to become infrastructure experts
-              just to keep an app online. We package hosting, databases, storage, servers and
-              security into one subscription, sized to what you're actually building.
+              TezGrid Associates exists because most businesses end up stitching together a
+              freelance developer, a SaaS subscription and an agency for advice. We do all three
+              ourselves — custom software, our own products, and the consulting to tell you which
+              one you actually need.
             </p>
           </Reveal>
         </div>
@@ -71,16 +90,16 @@ export default function About() {
             <span className="eyebrow">
               <Layers size={14} /> Our approach
             </span>
-            <h2>We design your stack instead of selling you a tier</h2>
+            <h2>We design your solution instead of selling you a package</h2>
             <p>
-              Off-the-shelf hosting plans force your app to fit their limits. We start from your
-              requirements — expected traffic, data model, compliance needs — and put together
-              the hosting, database, storage and security configuration that actually fits, then
-              manage it for as long as you're with us.
+              Every engagement starts with the same question: what's the actual business problem?
+              From there we point you toward custom development, one of our products, or
+              straight consulting — sometimes a mix of all three — and manage it for as long as
+              you're with us.
             </p>
           </Reveal>
           <Reveal delay={120} className="about-mission__icon">
-            <Gauge size={64} strokeWidth={1.4} />
+            <Boxes size={64} strokeWidth={1.4} />
           </Reveal>
         </div>
       </section>
@@ -88,8 +107,29 @@ export default function About() {
       <section className="section section--tight">
         <div className="container">
           <Reveal className="section-head">
+            <span className="eyebrow">How we work</span>
+            <h2>Three service lines, one accountable team</h2>
+          </Reveal>
+
+          <div className="pillars-grid">
+            {PILLARS.map((p, i) => (
+              <Reveal as="div" delay={i * 70} className="card value-card" key={p.title}>
+                <div className="value-card__icon">
+                  <p.icon size={22} />
+                </div>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tight">
+        <div className="container">
+          <Reveal className="section-head">
             <span className="eyebrow">What we stand for</span>
-            <h2>The principles behind every plan we build</h2>
+            <h2>The principles behind every project we take on</h2>
           </Reveal>
 
           <div className="values-grid">
@@ -108,10 +148,10 @@ export default function About() {
 
       <section className="section--tight cta-banner">
         <Reveal className="container cta-banner__inner card">
-          <h2>Want infrastructure that just runs?</h2>
-          <p>Tell us what you're building — we'll design the stack around it.</p>
+          <h2>Want software that actually fits your business?</h2>
+          <p>Tell us what you're working on — we'll point you to the right path.</p>
           <NavLink to="/contact" className="btn btn-primary">
-            Talk to TezGrid <ArrowRight size={16} />
+            Talk to TezGrid Associates <ArrowRight size={16} />
           </NavLink>
         </Reveal>
       </section>

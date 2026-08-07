@@ -1,10 +1,39 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Check, ArrowRight, ChevronDown } from 'lucide-react'
+import { Check, ArrowRight, ChevronDown, Code2, Server } from 'lucide-react'
 import Reveal from '../components/Reveal.jsx'
 import './Pricing.css'
 
-const PLANS = [
+const MODELS = [
+  {
+    icon: Code2,
+    title: 'Custom Development',
+    tagline: 'Website or mobile app — priced per project',
+    points: [
+      'Quoted on scope: platforms, integrations, timeline',
+      'One-time build, or ongoing retainer for support',
+      'Consulting included through the build',
+      'Hosting billed on the plans below once live',
+    ],
+    cta: 'Get a custom quote',
+    to: '/contact',
+  },
+  {
+    icon: Server,
+    title: 'Cloud Hosting',
+    tagline: 'Hosting, database & security — priced per subscription',
+    points: [
+      'Monthly or yearly billing, resize any time',
+      'Database, storage and security included',
+      'Works for apps we build or your existing app',
+      '99.9%+ availability targets',
+    ],
+    cta: 'See hosting plans',
+    to: '#hosting-plans',
+  },
+]
+
+const HOSTING_PLANS = [
   {
     name: 'Starter',
     tagline: 'For a single app or MVP finding its feet',
@@ -86,24 +115,24 @@ const PLANS = [
 
 const FAQS = [
   {
-    q: 'Can I change or upgrade my plan later?',
+    q: 'How is custom development priced?',
+    a: 'Per project, based on scope — which platforms (web/mobile), integrations, and timeline. Share your requirement and we return a fixed quote before any work starts.',
+  },
+  {
+    q: 'Can I change or upgrade my hosting plan later?',
     a: 'Yes. As your app grows, we resize hosting, storage and database resources without downtime — you can move between plans at any time.',
   },
   {
-    q: 'What exactly counts as "an application"?',
-    a: 'One deployed app, API or site with its own environment. Multiple environments (staging/prod) for the same app count as one application.',
-  },
-  {
     q: 'Can you migrate our app from our current host?',
-    a: 'Yes, migration is included when you sign up. We plan the cutover with you so there\'s no unexpected downtime.',
+    a: 'Yes, migration is included when you sign up for a hosting plan. We plan the cutover with you so there\'s no unexpected downtime.',
   },
   {
-    q: 'Is security really included, not an add-on?',
-    a: 'Correct. SSL, firewall and basic access control ship in every plan. Business adds DDoS protection, RBAC and audit logging as standard, and Enterprise builds custom security around your compliance needs.',
+    q: 'Is there a setup or onboarding fee?',
+    a: 'No setup fees on Starter or Business hosting. Custom development includes a scoping phase in the project quote, so there are no hidden add-ons.',
   },
   {
-    q: 'Is there a setup fee?',
-    a: 'No setup fees on Starter or Business. Enterprise onboarding is scoped and quoted upfront with no hidden costs.',
+    q: 'Do you offer consulting without a build attached?',
+    a: 'Yes — if you just need help deciding what to build, that consulting conversation is free.',
   },
 ]
 
@@ -117,7 +146,47 @@ export default function Pricing() {
         <div className="container">
           <Reveal className="section-head">
             <span className="eyebrow">Pricing</span>
-            <h1>One subscription. Every service included.</h1>
+            <h1>Two ways to work with us, priced simply</h1>
+            <p>Custom software is quoted per project. Hosting is a straightforward subscription.</p>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section--tight">
+        <div className="container model-grid">
+          {MODELS.map((m, i) => (
+            <Reveal as="div" delay={i * 100} className="card model-card" key={m.title}>
+              <div className="model-card__icon">
+                <m.icon size={24} />
+              </div>
+              <h3>{m.title}</h3>
+              <p className="model-card__tagline">{m.tagline}</p>
+              <ul className="pricing-card__features">
+                {m.points.map((p) => (
+                  <li key={p}>
+                    <Check size={16} /> {p}
+                  </li>
+                ))}
+              </ul>
+              {m.to.startsWith('#') ? (
+                <a href={m.to} className="btn btn-ghost btn-block">
+                  {m.cta} <ArrowRight size={16} />
+                </a>
+              ) : (
+                <NavLink to={m.to} className="btn btn-ghost btn-block">
+                  {m.cta} <ArrowRight size={16} />
+                </NavLink>
+              )}
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section id="hosting-plans" className="section--tight">
+        <div className="container">
+          <Reveal className="section-head">
+            <span className="eyebrow">Cloud Hosting plans</span>
+            <h2>One subscription, every hosting service included</h2>
             <p>Simple, predictable plans — or a fully custom package built around your app.</p>
           </Reveal>
 
@@ -135,11 +204,9 @@ export default function Pricing() {
             </span>
           </Reveal>
         </div>
-      </section>
 
-      <section className="section--tight">
         <div className="container pricing-grid">
-          {PLANS.map((plan, i) => (
+          {HOSTING_PLANS.map((plan, i) => (
             <Reveal
               as="div"
               delay={i * 80}
@@ -191,16 +258,8 @@ export default function Pricing() {
                     </ul>
                   </div>
                 ))
-              ) : plan.note ? (
-                <p className="pricing-card__note">{plan.note}</p>
               ) : (
-                <ul className="pricing-card__features">
-                  {plan.features.map((f) => (
-                    <li key={f}>
-                      <Check size={16} /> {f}
-                    </li>
-                  ))}
-                </ul>
+                <p className="pricing-card__note">{plan.note}</p>
               )}
             </Reveal>
           ))}

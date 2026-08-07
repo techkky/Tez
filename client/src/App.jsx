@@ -8,6 +8,10 @@ import Services from './pages/Services.jsx'
 import Pricing from './pages/Pricing.jsx'
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
+import Login from './pages/Login.jsx'
+import ForgotPassword from './pages/ForgotPassword.jsx'
+import ResetPassword from './pages/ResetPassword.jsx'
+import Dashboard from './pages/Dashboard.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 function ScrollToTop() {
@@ -18,12 +22,17 @@ function ScrollToTop() {
   return null
 }
 
+const APP_ROUTES = ['/login', '/forgot-password', '/reset-password', '/dashboard']
+
 export default function App() {
+  const { pathname } = useLocation()
+  const isAppRoute = APP_ROUTES.includes(pathname)
+
   return (
     <>
       <BackgroundFx />
       <ScrollToTop />
-      <Navbar />
+      {!isAppRoute && <Navbar />}
       <main style={{ flex: 1 }}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -31,10 +40,14 @@ export default function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      <Footer />
+      {!isAppRoute && <Footer />}
     </>
   )
 }

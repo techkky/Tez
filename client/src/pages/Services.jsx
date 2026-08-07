@@ -1,12 +1,15 @@
 import { NavLink } from 'react-router-dom'
 import {
   ArrowRight,
+  Globe,
+  Smartphone,
   Server,
   Database,
   HardDrive,
   Cpu,
   ShieldCheck,
   Activity,
+  MessagesSquare,
   CheckCircle2,
   Settings2,
 } from 'lucide-react'
@@ -15,9 +18,31 @@ import './Services.css'
 
 const SERVICES = [
   {
+    icon: Globe,
+    title: 'Website Development',
+    desc: 'Marketing sites, dashboards and web platforms built around your workflow, not a page builder template.',
+    points: [
+      'Custom UI, built for your brand and users',
+      'Admin panels and internal tools',
+      'API integrations with your existing systems',
+      'Performance and SEO handled from day one',
+    ],
+  },
+  {
+    icon: Smartphone,
+    title: 'Mobile App Development',
+    desc: 'iOS and Android apps designed around the workflow your team or customers actually use.',
+    points: [
+      'Native and cross-platform builds',
+      'Backend APIs built alongside the app',
+      'Push notifications, payments, auth built in',
+      'App store submission and updates handled',
+    ],
+  },
+  {
     icon: Server,
     title: 'Cloud Hosting',
-    desc: 'Production-ready hosting for web apps, APIs and static sites, auto-scaled to match real traffic instead of guesswork.',
+    desc: 'Production-ready hosting for the web apps, APIs and sites we build — auto-scaled to match real traffic instead of guesswork.',
     points: [
       'Auto-scaling infrastructure for traffic spikes',
       'Separate staging and production environments',
@@ -80,6 +105,17 @@ const SERVICES = [
       'Guaranteed incident response SLA',
     ],
   },
+  {
+    icon: MessagesSquare,
+    title: 'IT Consulting',
+    desc: 'Not sure what to build yet? We start from the business problem and work backward to the software.',
+    points: [
+      'Requirement discovery and scoping',
+      'Solution architecture and technology choices',
+      'Build vs. buy guidance (including our own products)',
+      'Ongoing technical advisory as you grow',
+    ],
+  },
 ]
 
 export default function Services() {
@@ -89,10 +125,10 @@ export default function Services() {
         <div className="container">
           <Reveal className="section-head">
             <span className="eyebrow">Services</span>
-            <h1>Everything it takes to run your app in production</h1>
+            <h1>Everything it takes to turn your requirement into working software</h1>
             <p>
-              Hosting, databases, storage, servers, security and support — packaged as one
-              subscription and configured around the requirements you give us.
+              Website, mobile app and cloud hosting delivered as custom development — plus
+              consulting when you need help figuring out what to build at all.
             </p>
           </Reveal>
         </div>
@@ -129,29 +165,29 @@ export default function Services() {
               <Settings2 size={14} /> Tailored, not templated
             </span>
             <h2>
-              Every subscription is <span className="gradient-text">built around your app</span>
+              Every project is <span className="gradient-text">scoped around your requirement</span>
             </h2>
             <p>
-              Tell us your traffic expectations, data needs and compliance requirements — we
-              combine hosting, database, storage, server and security into one package sized
-              exactly for you, not a generic tier.
+              Tell us what you're building and why — we combine the right mix of website, mobile
+              app, hosting and consulting into a plan sized exactly for your business, not a
+              generic package.
             </p>
             <NavLink to="/contact" className="btn btn-primary">
-              Get a custom plan <ArrowRight size={16} />
+              Get a custom quote <ArrowRight size={16} />
             </NavLink>
           </Reveal>
           <Reveal delay={120} className="custom-plan__card card">
             <div className="custom-plan__row">
-              <span>Hosting</span><span>Auto-scaled</span>
+              <span>Website</span><span>Custom-built</span>
             </div>
             <div className="custom-plan__row">
-              <span>Database</span><span>PostgreSQL + replica</span>
+              <span>Mobile app</span><span>iOS + Android</span>
             </div>
             <div className="custom-plan__row">
-              <span>Storage</span><span>500 GB + CDN</span>
+              <span>Hosting</span><span>Managed & monitored</span>
             </div>
             <div className="custom-plan__row">
-              <span>Security</span><span>WAF + SSL + RBAC</span>
+              <span>Consulting</span><span>Included throughout</span>
             </div>
             <div className="custom-plan__row custom-plan__row--total">
               <span>Your plan</span><span>Built with you</span>
@@ -159,6 +195,7 @@ export default function Services() {
           </Reveal>
         </div>
       </section>
+
     </>
   )
 }

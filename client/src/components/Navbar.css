@@ -43,6 +43,19 @@
   color: var(--cyan);
 }
 
+.navbar__logo-suffix {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 520px) {
+  .navbar__logo-suffix {
+    display: none;
+  }
+}
+
 .navbar__links {
   display: flex;
   align-items: center;
@@ -68,8 +81,13 @@
   background: var(--surface);
 }
 
-.navbar__cta {
+.navbar__login {
   margin-left: 12px;
+  padding: 9px 18px;
+  font-size: 14.5px;
+}
+
+.navbar__cta {
   padding: 10px 20px;
   font-size: 14.5px;
 }
@@ -116,9 +134,14 @@
     padding: 12px 16px;
   }
 
-  .navbar__cta {
+  .navbar__login {
     margin-left: 0;
     margin-top: 6px;
+    justify-content: center;
+  }
+
+  .navbar__cta {
+    margin-left: 0;
     justify-content: center;
   }
 }

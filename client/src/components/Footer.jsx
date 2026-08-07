@@ -9,11 +9,11 @@ export default function Footer() {
         <div className="footer__brand">
           <NavLink to="/" className="navbar__logo">
             <img src="/logo-mark.png" alt="" className="navbar__mark" width={34} height={34} />
-            <span>Tez<span className="navbar__logo-accent">Grid</span></span>
+            <span>Tez<span className="navbar__logo-accent">Grid</span> <span className="navbar__logo-suffix">Associates</span></span>
           </NavLink>
           <p>
-            Complete cloud subscription packages — hosting, database, storage, servers and
-            security — built around what your app actually needs.
+            IT Services & Solutions — custom software development, our own subscription products,
+            and consulting that solves real business problems through software.
           </p>
           <div className="footer__social">
             <a href="#" aria-label="Website"><Globe size={17} /></a>
@@ -31,23 +31,22 @@ export default function Footer() {
         </div>
 
         <div className="footer__col">
-          <h4>Services</h4>
-          <NavLink to="/services">Cloud Hosting</NavLink>
-          <NavLink to="/services">Managed Databases</NavLink>
-          <NavLink to="/services">Cloud Storage</NavLink>
-          <NavLink to="/services">Security & Compliance</NavLink>
+          <h4>What we do</h4>
+          <NavLink to="/services">Custom Software Development</NavLink>
+          <NavLink to="/services">IT Consulting</NavLink>
+          <NavLink to="/pricing">Pricing</NavLink>
         </div>
 
         <div className="footer__col">
           <h4>Get in touch</h4>
-          <a href="mailto:hello@tezgrid.com"><Mail size={15} /> hello@tezgrid.com</a>
+          <a href="mailto:tezgrid@gmail.com"><Mail size={15} /> tezgrid@gmail.com</a>
           <span className="footer__addr"><MapPin size={15} /> India</span>
         </div>
       </div>
 
       <div className="container footer__bottom">
-        <span>© {new Date().getFullYear()} TezGrid. All rights reserved.</span>
-        <span>Built for apps that need to just run.</span>
+        <span>© {new Date().getFullYear()} TezGrid Associates. All rights reserved.</span>
+        <span>Software, products and consulting — built around your business.</span>
       </div>
     </footer>
   )

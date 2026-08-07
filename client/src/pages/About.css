@@ -37,6 +37,12 @@
   gap: 22px;
 }
 
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
 .value-card {
   padding: 28px 24px;
 }
@@ -72,13 +78,15 @@
     order: -1;
   }
 
-  .values-grid {
+  .values-grid,
+  .pillars-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 560px) {
-  .values-grid {
+  .values-grid,
+  .pillars-grid {
     grid-template-columns: 1fr;
   }
 }

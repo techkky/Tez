@@ -1,78 +1,63 @@
 import { NavLink } from 'react-router-dom'
 import {
   ArrowRight,
-  Server,
-  Database,
-  HardDrive,
-  Cpu,
-  ShieldCheck,
-  Activity,
+  Code2,
+  Boxes,
+  MessagesSquare,
   CheckCircle2,
   Sparkles,
 } from 'lucide-react'
 import Reveal from '../components/Reveal.jsx'
 import './Home.css'
 
-const SERVICES = [
+const PILLARS = [
   {
-    icon: Server,
-    title: 'Cloud Hosting',
-    desc: 'Fast, auto-scaling hosting for web apps, APIs and static sites — configured for your stack.',
+    icon: Code2,
+    title: 'Custom Software Development',
+    desc: 'Websites, mobile apps and cloud hosting built around your exact requirement — not a template.',
+    link: '/services',
   },
   {
-    icon: Database,
-    title: 'Managed Databases',
-    desc: 'SQL & NoSQL databases with automated backups, replication and tuning, so data is never a worry.',
+    icon: Boxes,
+    title: 'Our Products',
+    desc: 'Subscription-based software we build and run ourselves, sold directly to businesses.',
+    link: '/contact',
   },
   {
-    icon: HardDrive,
-    title: 'Cloud Storage',
-    desc: 'Scalable object and file storage with CDN delivery for media, backups and user uploads.',
-  },
-  {
-    icon: Cpu,
-    title: 'Dedicated Cloud Servers',
-    desc: 'Right-sized virtual or dedicated servers provisioned around your app’s real workload.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Security & Compliance',
-    desc: 'Firewalls, SSL, DDoS protection and access control built into every plan from day one.',
-  },
-  {
-    icon: Activity,
-    title: '24/7 Monitoring & Support',
-    desc: 'Round-the-clock uptime monitoring with a team that responds before you notice a problem.',
+    icon: MessagesSquare,
+    title: 'IT Consulting',
+    desc: 'Tell us the business problem — we design and build the software that actually solves it.',
+    link: '/contact',
   },
 ]
 
 const STATS = [
-  { value: '99.9%', label: 'Uptime SLA' },
-  { value: '<15 min', label: 'Avg. response time' },
-  { value: '150+', label: 'Apps hosted' },
-  { value: '24/7', label: 'Live support' },
+  { value: '3', label: 'Core service lines' },
+  { value: '24/7', label: 'Support & consulting' },
+  { value: '1', label: 'Accountable team' },
+  { value: '100%', label: 'Requirement-first builds' },
 ]
 
 const STEPS = [
   {
-    title: 'Tell us your requirements',
-    desc: 'Share what you’re building — traffic expectations, data needs, compliance requirements.',
+    title: 'Tell us what you need',
+    desc: 'A custom build, one of our products, or help figuring out the right software approach.',
   },
   {
-    title: 'We architect your stack',
-    desc: 'Our team designs a complete hosting, database, storage and security setup around it.',
+    title: 'We design the solution',
+    desc: 'Our team scopes the app, product fit or architecture around your actual business problem.',
   },
   {
-    title: 'You launch, we manage',
-    desc: 'Go live on a single subscription while we monitor, patch, scale and secure everything.',
+    title: 'You launch, we stay involved',
+    desc: 'Development, deployment and ongoing support — on a subscription or project basis, your call.',
   },
 ]
 
 const WHY = [
-  'One subscription instead of five vendor bills',
-  'Predictable monthly pricing, no surprise overages',
-  'Security and backups included, not bolted on',
-  'A real team on call — not just a support ticket queue',
+  'One partner for development, products and consulting — not three vendors',
+  'Software built around your requirement, not a fixed package',
+  'Our own products are used the way we build for clients',
+  'A real team on call — not a support ticket queue',
 ]
 
 export default function Home() {
@@ -82,15 +67,15 @@ export default function Home() {
         <div className="container hero__grid">
           <Reveal>
             <span className="eyebrow">
-              <Sparkles size={14} /> Cloud infrastructure, fully managed
+              <Sparkles size={14} /> IT Services & Solutions
             </span>
             <h1 className="hero__title">
-              Ship your app. <span className="gradient-text">We'll run the cloud.</span>
+              We build it. We run it. <span className="gradient-text">You grow.</span>
             </h1>
             <p className="hero__subtitle">
-              TezGrid bundles hosting, databases, storage, cloud servers and security into a
-              single subscription — built around what your app actually requires, so you stop
-              stitching together five different vendors.
+              TezGrid Associates builds custom software for clients, runs our own subscription
+              products, and consults on the software that actually solves your business problem —
+              websites, mobile apps and cloud hosting included.
             </p>
             <div className="hero__actions">
               <NavLink to="/contact" className="btn btn-primary">
@@ -105,13 +90,13 @@ export default function Home() {
           <Reveal delay={120} className="hero__panel-wrap">
             <div className="hero__panel card">
               <div className="hero__panel-head">
-                <span className="dot dot--live" /> Infrastructure status
+                <span className="dot dot--live" /> What we deliver
               </div>
               {[
-                ['Hosting', 'Active', 'good'],
-                ['Database', 'Healthy', 'good'],
-                ['Storage', '42% used', 'neutral'],
-                ['Security', 'Protected', 'good'],
+                ['Custom Software', 'Web · Mobile · Cloud', 'good'],
+                ['Our Products', 'In development', 'neutral'],
+                ['Consulting', 'Ongoing engagements', 'neutral'],
+                ['Support', '24/7', 'good'],
               ].map(([label, value, tone]) => (
                 <div className="hero__panel-row" key={label}>
                   <span>{label}</span>
@@ -119,7 +104,7 @@ export default function Home() {
                 </div>
               ))}
               <div className="hero__panel-footer">
-                <CheckCircle2 size={15} /> Monitored continuously by TezGrid
+                <CheckCircle2 size={15} /> Delivered end-to-end by TezGrid Associates
               </div>
             </div>
           </Reveal>
@@ -138,19 +123,22 @@ export default function Home() {
       <section className="section">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow">What we provide</span>
-            <h2>Every service your app needs to go live</h2>
-            <p>One subscription, built around your requirements — not a generic package.</p>
+            <span className="eyebrow">What we do</span>
+            <h2>Three ways to work with TezGrid Associates</h2>
+            <p>Pick a custom build, subscribe to a product, or bring us the problem — we handle the software.</p>
           </div>
 
           <div className="grid-6">
-            {SERVICES.map((s, i) => (
+            {PILLARS.map((s, i) => (
               <Reveal as="div" delay={i * 60} className="card service-card" key={s.title}>
                 <div className="service-card__icon">
                   <s.icon size={22} />
                 </div>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
+                <NavLink to={s.link} className="service-card__link">
+                  Learn more <ArrowRight size={14} />
+                </NavLink>
               </Reveal>
             ))}
           </div>
@@ -179,13 +167,14 @@ export default function Home() {
       <section className="section why">
         <div className="container why__grid">
           <Reveal>
-            <span className="eyebrow">Why TezGrid</span>
+            <span className="eyebrow">Why TezGrid Associates</span>
             <h2>
-              Infrastructure that stays out of <span className="gradient-text">your</span> way
+              Software that stays out of <span className="gradient-text">your</span> way
             </h2>
             <p className="why__lede">
-              Most teams end up managing a patchwork of hosting providers, database vendors and
-              security tools. TezGrid replaces that patchwork with one accountable partner.
+              Most businesses end up juggling a freelance developer, a SaaS subscription and an
+              agency for advice. TezGrid Associates replaces that patchwork with one accountable
+              partner for development, products and consulting.
             </p>
           </Reveal>
           <Reveal delay={150} className="why__list">
@@ -201,10 +190,10 @@ export default function Home() {
 
       <section className="section--tight cta-banner">
         <Reveal className="container cta-banner__inner card">
-          <h2>Ready to move your app to a cloud that just works?</h2>
-          <p>Tell us what you're building — we'll put together a plan the same week.</p>
+          <h2>Ready to build, subscribe, or just talk it through?</h2>
+          <p>Tell us what you're working on — we'll come back with a plan the same week.</p>
           <NavLink to="/contact" className="btn btn-primary">
-            Talk to TezGrid <ArrowRight size={16} />
+            Talk to TezGrid Associates <ArrowRight size={16} />
           </NavLink>
         </Reveal>
       </section>
