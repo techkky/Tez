@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /login
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /dashboard
 
-Sitemap: https://tez-grid.vercel.app/sitemap.xml
+Sitemap: https://tezgrid.in/sitemap.xml
