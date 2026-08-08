@@ -1,120 +1,88 @@
 import { NavLink } from 'react-router-dom'
 import {
   ArrowRight,
-  Globe,
-  Smartphone,
+  Code2,
+  Sparkles,
+  FileSpreadsheet,
+  LayoutDashboard,
+  MapPin,
   Server,
-  Database,
-  HardDrive,
-  Cpu,
-  ShieldCheck,
-  Activity,
   MessagesSquare,
-  CheckCircle2,
   Settings2,
+  CheckCircle2,
+  PhoneCall,
+  FileText,
+  Hammer,
+  Rocket,
 } from 'lucide-react'
 import Reveal from '../components/Reveal.jsx'
 import './Services.css'
 
 const SERVICES = [
   {
-    icon: Globe,
-    title: 'Website Development',
-    desc: 'Marketing sites, dashboards and web platforms built around your workflow, not a page builder template.',
-    points: [
-      'Custom UI, built for your brand and users',
-      'Admin panels and internal tools',
-      'API integrations with your existing systems',
-      'Performance and SEO handled from day one',
-    ],
+    icon: Code2,
+    title: 'Website & App Development',
+    desc: 'Custom websites and mobile apps built around your business — not a template.',
+    points: ['Custom UI for your brand', 'Website, mobile app, or both', 'Built to handle real traffic'],
   },
   {
-    icon: Smartphone,
-    title: 'Mobile App Development',
-    desc: 'iOS and Android apps designed around the workflow your team or customers actually use.',
-    points: [
-      'Native and cross-platform builds',
-      'Backend APIs built alongside the app',
-      'Push notifications, payments, auth built in',
-      'App store submission and updates handled',
-    ],
+    icon: Sparkles,
+    title: 'AI-Powered Solutions',
+    desc: 'Add smart features to your existing software.',
+    points: ['AI search & chatbots', 'Auto-summaries from your data', 'Works with what you already have'],
+  },
+  {
+    icon: FileSpreadsheet,
+    title: 'Excel & Data Migration',
+    desc: 'Move your Excel sheets into a proper system.',
+    points: ['Bulk import, no manual re-entry', 'No data or formatting loss', 'One-time or ongoing sync'],
+  },
+  {
+    icon: LayoutDashboard,
+    title: 'Customer Portals',
+    desc: "Give your customers their own login.",
+    points: ['Branded to your business', 'Orders, bills & status in one place', 'Updates in real time'],
+  },
+  {
+    icon: MapPin,
+    title: 'Field Team Tracking',
+    desc: 'Know what your field staff are doing.',
+    points: ['Live GPS location', 'QR-code attendance', 'Automatic daily reports'],
   },
   {
     icon: Server,
     title: 'Cloud Hosting',
-    desc: 'Production-ready hosting for the web apps, APIs and sites we build — auto-scaled to match real traffic instead of guesswork.',
-    points: [
-      'Auto-scaling infrastructure for traffic spikes',
-      'Separate staging and production environments',
-      'One-click, zero-downtime deployments',
-      'Global CDN edge caching for faster load times',
-    ],
-  },
-  {
-    icon: Database,
-    title: 'Managed Databases',
-    desc: 'SQL and NoSQL databases, provisioned, tuned and backed up so your data layer is never the thing that breaks at 2am.',
-    points: [
-      'PostgreSQL, MySQL, MongoDB & Redis support',
-      'Automated daily backups with point-in-time recovery',
-      'Read replicas for high-traffic workloads',
-      'Query performance monitoring and tuning',
-    ],
-  },
-  {
-    icon: HardDrive,
-    title: 'Cloud Storage',
-    desc: 'Scalable object and file storage for media, user uploads and backups, delivered through a CDN wherever your users are.',
-    points: [
-      'S3-compatible object storage, scales automatically',
-      'CDN-backed delivery for images, video & files',
-      'Versioning and lifecycle policies built in',
-      'Encrypted at rest and in transit',
-    ],
-  },
-  {
-    icon: Cpu,
-    title: 'Dedicated Cloud Servers',
-    desc: 'Virtual or dedicated compute sized around your actual workload, not a one-size-fits-all instance.',
-    points: [
-      'Custom vCPU, RAM and disk configurations',
-      'Root/admin access when you need control',
-      'Private networking between your services',
-      'Point-in-time snapshots and easy rollback',
-    ],
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Security & Compliance',
-    desc: 'Firewalls, encryption and access control included in every plan, not sold as an expensive add-on later.',
-    points: [
-      'Web application firewall & DDoS protection',
-      'Free SSL/TLS certificates, auto-renewed',
-      'Role-based access control for your team',
-      'Full audit logging for every change',
-    ],
-  },
-  {
-    icon: Activity,
-    title: '24/7 Monitoring & Support',
-    desc: 'A real team watching uptime, performance and security around the clock, backed by clear response-time SLAs.',
-    points: [
-      'Real-time uptime & performance alerting',
-      'On-call engineers for critical incidents',
-      'Monthly infrastructure health reports',
-      'Guaranteed incident response SLA',
-    ],
+    desc: 'Hosting for your website or app, managed by us.',
+    points: ['24/7 monitoring & backups', 'Auto-scales for traffic spikes', 'We handle the downtime, not you'],
   },
   {
     icon: MessagesSquare,
     title: 'IT Consulting',
-    desc: 'Not sure what to build yet? We start from the business problem and work backward to the software.',
-    points: [
-      'Requirement discovery and scoping',
-      'Solution architecture and technology choices',
-      'Build vs. buy guidance (including our own products)',
-      'Ongoing technical advisory as you grow',
-    ],
+    desc: 'Not sure what to build yet?',
+    points: ['Free requirement discovery call', 'A clear written plan first', 'Advice even if you don’t build with us'],
+  },
+]
+
+const STEPS = [
+  {
+    icon: PhoneCall,
+    title: 'One call to understand your problem',
+    desc: 'No sales pitch — a real conversation about what’s costing you time or money right now.',
+  },
+  {
+    icon: FileText,
+    title: 'A written plan you can actually read',
+    desc: 'What we’ll build, how long it’ll take, and the price — in plain language, before we start.',
+  },
+  {
+    icon: Hammer,
+    title: 'Weekly updates while we build',
+    desc: 'A live link from day one, so you watch it come together instead of waiting for a big reveal.',
+  },
+  {
+    icon: Rocket,
+    title: 'Launch, handover & support',
+    desc: 'We deploy it, walk your team through it, and stay reachable after launch — not just until payment clears.',
   },
 ]
 
@@ -135,26 +103,45 @@ export default function Services() {
       </section>
 
       <section className="section--tight">
-        <div className="container services-list">
+        <div className="container services-grid">
           {SERVICES.map((s, i) => (
-            <Reveal as="div" delay={i * 40} className="service-row card" key={s.title}>
-              <div className="service-row__icon">
-                <s.icon size={28} />
+            <Reveal as="div" delay={i * 50} className="card service-tile" key={s.title}>
+              <div className="service-tile__icon">
+                <s.icon size={22} />
               </div>
-              <div className="service-row__body">
-                <h2>{s.title}</h2>
-                <p>{s.desc}</p>
-                <ul>
-                  {s.points.map((p) => (
-                    <li key={p}>
-                      <CheckCircle2 size={16} />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+              <ul>
+                {s.points.map((p) => (
+                  <li key={p}>
+                    <CheckCircle2 size={14} /> {p}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <section className="section--tight steps">
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow">How we work</span>
+            <h2>From first call to launch, in four steps</h2>
+          </div>
+
+          <div className="steps__grid">
+            {STEPS.map((step, i) => (
+              <Reveal as="div" delay={i * 100} className="card steps__item" key={step.title}>
+                <div className="steps__icon">
+                  <step.icon size={20} />
+                </div>
+                <span className="steps__num">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{step.title}</h3>
+                <p>{step.desc}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -195,7 +182,6 @@ export default function Services() {
           </Reveal>
         </div>
       </section>
-
     </>
   )
 }
