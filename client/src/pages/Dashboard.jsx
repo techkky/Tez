@@ -736,11 +736,11 @@ function BillingPanel({ onEditAddress }) {
         </div>
       ) : (
         pending && (
-          <div className="card dash-alert">
+          <div className="card dash-alert dash-alert--danger">
             <AlertTriangle size={20} />
             <div>
-              <strong>Payment due — {pending.note}</strong>
-              <p>Your {pending.plan} plan payment is pending. Pay today or your subscription will be cancelled on {periodEnd}.</p>
+              <strong>Subscription cancelled — payment overdue</strong>
+              <p>Your {pending.plan} plan subscription has been cancelled due to a pending payment. Complete the payment to renew your subscription.</p>
             </div>
             <button className="btn btn-primary" onClick={() => setPaying(pending)}>
               Pay now
