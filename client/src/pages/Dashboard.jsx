@@ -49,7 +49,7 @@ const ACTIVE_PLAN = {
 }
 
 const BILLING_HISTORY = [
-  { id: 5, date: '2026-08-08', month: 'August 2026', plan: 'Business', amount: 17499, status: 'pending', note: '1 day left', invoiceNo: 'TG-INV-2026-348', pdf: '/invoices/TG-INV-2026-348.pdf' },
+  { id: 5, date: '2026-08-11', time: '16:50', month: 'August 2026', plan: 'Business', amount: 17499, status: 'paid', invoiceNo: 'TG-INV-2026-348', pdf: '/invoices/TG-INV-2026-348.pdf' },
   { id: 4, date: '2026-07-01', month: 'July 2026', plan: 'Business', amount: 17499, status: 'paid', invoiceNo: 'TG-INV-2026-345', pdf: '/invoices/TG-INV-2026-345.pdf' },
   { id: 3, date: '2026-06-01', month: 'June 2026', plan: 'Starter', amount: 4999, status: 'paid', invoiceNo: 'TG-INV-2026-344', pdf: '/invoices/TG-INV-2026-344.pdf' },
   { id: 2, date: '2026-05-01', month: 'May 2026', plan: 'Starter', amount: 4999, status: 'paid', invoiceNo: 'TG-INV-2026-343', pdf: '/invoices/TG-INV-2026-343.pdf' },
@@ -373,11 +373,18 @@ function UsagePanel() {
 function InvoiceModal({ entry, onClose, onPay }) {
   const isPaid = entry.status === 'paid'
   const address = localStorage.getItem('tezgrid_address') || ''
-  const paymentDate = new Date(entry.date.slice(0, 7) + '-01').toLocaleDateString('en-US', {
+  const paymentDate = new Date(`${entry.date}T00:00:00`).toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
   })
+  const paymentTime = entry.time
+    ? new Date(`${entry.date}T${entry.time}:00`).toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+      })
+    : null
 
   return (
     <div className="dash-modal-overlay" onClick={onClose}>
@@ -409,7 +416,7 @@ function InvoiceModal({ entry, onClose, onPay }) {
             </div>
             <div className="dash-invoice__row">
               <span>Payment date</span>
-              <strong>{paymentDate}</strong>
+              <strong>{paymentDate}{paymentTime ? `, ${paymentTime}` : ''}</strong>
             </div>
             <div className="dash-invoice__row">
               <span>Plan</span>
@@ -734,39 +741,26 @@ function BillingPanel({ onEditAddress }) {
             <p>Your {activePlanName} plan stays active until {periodEnd}, then it will end.</p>
           </div>
         </div>
-      ) : (
-        pending && (
-          <div className="card dash-alert dash-alert--danger">
-            <AlertTriangle size={20} />
-            <div>
-              <strong>Subscription cancelled — payment overdue</strong>
-              <p>Your {pending.plan} plan subscription has been cancelled due to a pending payment. Complete the payment to renew your subscription.</p>
-            </div>
-            <button className="btn btn-primary" onClick={() => setPaying(pending)}>
-              Pay now
-            </button>
+      ) : pending ? (
+        <div className="card dash-alert dash-alert--danger">
+          <AlertTriangle size={20} />
+          <div>
+            <strong>Subscription cancelled — payment overdue</strong>
+            <p>Your {pending.plan} plan subscription has been cancelled due to a pending payment. Complete the payment to renew your subscription.</p>
           </div>
-        )
-      )}
-
-      <div className="card dash-block dash-billing__plan">
-        <div>
-          <span className="dash-usage__label">Active plan</span>
-          <div className="dash-billing__plan-name">
-            <strong className="dash-usage__value">{activePlanName}</strong>
-            {cancelled && <span className="pill pill--neutral">Cancels {periodEnd}</span>}
+          <button className="btn btn-primary" onClick={() => setPaying(pending)}>
+            Pay now
+          </button>
+        </div>
+      ) : (
+        <div className="card dash-alert dash-alert--success">
+          <CheckCircle2 size={20} />
+          <div>
+            <strong>Subscription active</strong>
+            <p>Your {activePlanName} plan is active through Aug 31, 2026.</p>
           </div>
         </div>
-        {cancelled ? (
-          <button className="btn btn-primary" onClick={() => setRenewOpen(true)}>
-            Renew plan
-          </button>
-        ) : (
-          <button className="btn btn-ghost" onClick={() => setCancelOpen(true)}>
-            Cancel plan
-          </button>
-        )}
-      </div>
+      )}
 
       <div className="card dash-block">
         <span className="dash-usage__label"><MapPin size={14} /> Billing address</span>
