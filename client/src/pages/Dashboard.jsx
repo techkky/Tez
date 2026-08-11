@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom'
 import {
   User,
@@ -20,6 +20,7 @@ import {
   PanelLeftOpen,
   Download,
   Database,
+  GripVertical,
 } from 'lucide-react'
 import { supabase } from '../lib/supabase.js'
 import './Dashboard.css'
@@ -380,6 +381,98 @@ const DB_SERVICES = [
   { key: 'auth', label: 'Auth', points: 18, min: 0, max: 1 },
 ]
 
+const DB_SUBSERVICES = ['Database', 'PostgREST', 'Auth', 'Realtime', 'Storage', 'Edge Functions']
+
+function useDrift(seed, min, max, step) {
+  const [value, setValue] = useState(seed)
+  useEffect(() => {
+    const id = setInterval(() => {
+      setValue((v) => Math.min(max, Math.max(min, v + (Math.random() - 0.5) * step)))
+    }, 2000)
+    return () => clearInterval(id)
+  }, [min, max, step])
+  return value
+}
+
+function useLiveTotal(seed) {
+  const [value, setValue] = useState(seed)
+  useEffect(() => {
+    const id = setInterval(() => {
+      setValue((v) => Math.max(0, v + Math.round((Math.random() - 0.3) * 6)))
+    }, 2200)
+    return () => clearInterval(id)
+  }, [])
+  return value
+}
+
+function DbStatusDots() {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    function onDocClick(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('mousedown', onDocClick)
+    return () => document.removeEventListener('mousedown', onDocClick)
+  }, [])
+
+  return (
+    <div className="dash-db-dots" ref={ref}>
+      <button type="button" className="dash-db-dots__btn" onClick={() => setOpen((v) => !v)}>
+        {Array.from({ length: 6 }).map((_, i) => (
+          <span key={i} className="dash-db-dots__dot" />
+        ))}
+      </button>
+      {open && (
+        <div className="dash-db-dots__panel">
+          {DB_SUBSERVICES.map((name) => (
+            <div className="dash-db-dots__row" key={name}>
+              <span className="dash-db-dots__check">
+                <Check size={12} />
+              </span>
+              <div>
+                <strong>{name}</strong>
+                <span>Healthy</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function PrimaryDatabaseCard() {
+  const cpu = useDrift(2, 1, 18, 3)
+  const disk = useDrift(15, 12, 22, 1)
+  const ram = useDrift(60, 45, 75, 4)
+
+  return (
+    <div className="dash-db-primary">
+      <div className="dash-db-primary__card">
+        <div className="dash-db-primary__head">
+          <span className="dash-db-primary__icon">
+            <Database size={16} />
+          </span>
+          <div className="dash-db-primary__info">
+            <strong>Primary Database</strong>
+            <span>South Asia (Mumbai)</span>
+            <span className="dash-db-primary__region">ap-south-1 · t4g.micro</span>
+          </div>
+          <span className="dash-db-primary__flag" aria-hidden="true">🇮🇳</span>
+        </div>
+        <div className="dash-db-primary__stats">
+          <span>CPU <strong>{Math.round(cpu)}%</strong></span>
+          <span>Disk <strong>{Math.round(disk)}%</strong></span>
+          <span>RAM <strong>{Math.round(ram)}%</strong></span>
+          <span>16/60 conns</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function useLiveBars(points, min, max) {
   const [data, setData] = useState(() =>
     Array.from({ length: points }, () => min + Math.random() * (max - min)),
@@ -437,6 +530,8 @@ function DbMiniChart({ label, points, min, max }) {
 }
 
 function DatabasePanel() {
+  const totalRequests = useLiveTotal(142)
+
   return (
     <div className="dash-panel">
       <h2>Database</h2>
@@ -446,7 +541,7 @@ function DatabasePanel() {
         <div className="card dash-block dash-db-status">
           <span className="dash-usage__label">Status</span>
           <div className="dash-db-status__value">
-            <span className="dot dot--live" />
+            <DbStatusDots />
             <strong className="dash-usage__value">Healthy</strong>
           </div>
         </div>
@@ -455,6 +550,8 @@ function DatabasePanel() {
           <strong className="dash-usage__value">Micro</strong>
         </div>
       </div>
+
+      <PrimaryDatabaseCard />
 
       <div className="card dash-block">
         <span className="dash-usage__label">Bucket storage</span>
@@ -465,9 +562,11 @@ function DatabasePanel() {
       </div>
 
       <div className="dash-db-metrics-head">
-        <span className="pill pill--good dash-livechart__live">
-          <span className="dot dot--live" /> Live
-        </span>
+        <div className="dash-db-metrics-head__stats">
+          <GripVertical size={16} className="dash-db-metrics-head__handle" />
+          <strong>{totalRequests}</strong> Total Requests
+          <strong>100.0%</strong> Success Rate
+        </div>
         <span className="dash-db-metrics-head__range">Last 60 minutes</span>
       </div>
 
