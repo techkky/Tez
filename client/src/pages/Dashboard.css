@@ -1102,6 +1102,11 @@
   margin-bottom: 0;
 }
 
+.dash-db-status {
+  position: relative;
+  z-index: 5;
+}
+
 .dash-db-status__value {
   display: flex;
   align-items: center;
