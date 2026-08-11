@@ -19,6 +19,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   Download,
+  Database,
 } from 'lucide-react'
 import { supabase } from '../lib/supabase.js'
 import './Dashboard.css'
@@ -27,6 +28,7 @@ const NAV = [
   { key: 'profile', label: 'Profile', icon: User },
   { key: 'plans', label: 'Plans', icon: Briefcase },
   { key: 'usage', label: 'Usage', icon: Activity },
+  { key: 'database', label: 'Database', icon: Database },
   { key: 'billing', label: 'Billing', icon: CreditCard },
 ]
 
@@ -364,6 +366,114 @@ function UsagePanel() {
               <div className="dash-usage__bar-fill" style={{ width: `${s.pct}%` }} />
             </div>
           </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const DB_SERVICES = [
+  { key: 'api', label: 'API Gateway', points: 18, min: 4, max: 22 },
+  { key: 'postgres', label: 'Postgres', points: 18, min: 0, max: 3 },
+  { key: 'realtime', label: 'Realtime', points: 18, min: 0, max: 2 },
+  { key: 'edge', label: 'Edge Functions', points: 18, min: 0, max: 1 },
+  { key: 'auth', label: 'Auth', points: 18, min: 0, max: 1 },
+]
+
+function useLiveBars(points, min, max) {
+  const [data, setData] = useState(() =>
+    Array.from({ length: points }, () => min + Math.random() * (max - min)),
+  )
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setData((prev) => {
+        const jitter = (max - min) * 0.6 || 1
+        const next = Math.min(max, Math.max(min, prev[prev.length - 1] + (Math.random() - 0.45) * jitter))
+        return [...prev.slice(1), next]
+      })
+    }, 2200)
+    return () => clearInterval(id)
+  }, [points, min, max])
+
+  return data
+}
+
+function formatChartTime(d) {
+  return d
+    .toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })
+    .replace('AM', 'am')
+    .replace('PM', 'pm')
+}
+
+function DbMiniChart({ label, points, min, max }) {
+  const data = useLiveBars(points, min, max)
+  const total = Math.round(data.reduce((a, b) => a + b, 0))
+  const barMax = Math.max(...data, 1)
+  const now = new Date()
+  const from = new Date(now.getTime() - 60 * 60000)
+
+  return (
+    <div className="card dash-db-mini">
+      <div className="dash-db-mini__head">
+        <span className="dash-db-mini__label">{label}</span>
+        <span className="dash-db-mini__flags">
+          <span><span className="dash-db-mini__dot dash-db-mini__dot--warn" /> Warnings 0</span>
+          <span><span className="dash-db-mini__dot dash-db-mini__dot--err" /> Errors 0</span>
+        </span>
+      </div>
+      <strong className="dash-db-mini__total">{total}</strong>
+      <div className="dash-db-mini__bars">
+        {data.map((v, i) => (
+          <span key={i} className="dash-db-mini__bar" style={{ height: `${Math.max(6, (v / barMax) * 100)}%` }} />
+        ))}
+      </div>
+      <div className="dash-db-mini__range">
+        <span>{formatChartTime(from)}</span>
+        <span>{formatChartTime(now)}</span>
+      </div>
+    </div>
+  )
+}
+
+function DatabasePanel() {
+  return (
+    <div className="dash-panel">
+      <h2>Database</h2>
+      <p className="dash-panel__lede">Live status of your provisioned database.</p>
+
+      <div className="dash-db-row">
+        <div className="card dash-block dash-db-status">
+          <span className="dash-usage__label">Status</span>
+          <div className="dash-db-status__value">
+            <span className="dot dot--live" />
+            <strong className="dash-usage__value">Healthy</strong>
+          </div>
+        </div>
+        <div className="card dash-block dash-db-status">
+          <span className="dash-usage__label">Compute</span>
+          <strong className="dash-usage__value">Micro</strong>
+        </div>
+      </div>
+
+      <div className="card dash-block">
+        <span className="dash-usage__label">Bucket storage</span>
+        <strong className="dash-usage__value">10 GB / 100 GB</strong>
+        <div className="dash-usage__bar">
+          <div className="dash-usage__bar-fill" style={{ width: '10%' }} />
+        </div>
+      </div>
+
+      <div className="dash-db-metrics-head">
+        <span className="pill pill--good dash-livechart__live">
+          <span className="dot dot--live" /> Live
+        </span>
+        <span className="dash-db-metrics-head__range">Last 60 minutes</span>
+      </div>
+
+      <div className="dash-db-mini-grid">
+        {DB_SERVICES.map((s) => (
+          <DbMiniChart key={s.key} {...s} />
         ))}
       </div>
     </div>
@@ -934,6 +1044,7 @@ export default function Dashboard() {
           )}
           {active === 'plans' && <PlansPanel />}
           {active === 'usage' && <UsagePanel />}
+          {active === 'database' && <DatabasePanel />}
           {active === 'billing' && <BillingPanel onEditAddress={() => setActive('profile')} />}
         </div>
       </div>
