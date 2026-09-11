@@ -52,7 +52,7 @@ const ACTIVE_PLAN = {
 }
 
 const BILLING_HISTORY = [
-  { id: 6, date: '2026-11-01', month: 'Sept to Nov 2026', plan: 'Business', amount: 45497, status: 'paid', invoiceNo: 'TG-INV-2026-349' },
+  { id: 6, date: '2026-09-11', month: 'Sept to Nov 2026', plan: 'Business', amount: 45497, status: 'paid', invoiceNo: 'TG-INV-2026-349' },
   { id: 5, date: '2026-08-11', time: '16:50', month: 'August 2026', plan: 'Business', amount: 17499, status: 'paid', invoiceNo: 'TG-INV-2026-348', pdf: '/invoices/TG-INV-2026-348.pdf' },
   { id: 4, date: '2026-07-01', month: 'July 2026', plan: 'Business', amount: 17499, status: 'paid', invoiceNo: 'TG-INV-2026-345', pdf: '/invoices/TG-INV-2026-345.pdf' },
   { id: 3, date: '2026-06-01', month: 'June 2026', plan: 'Starter', amount: 4999, status: 'paid', invoiceNo: 'TG-INV-2026-344', pdf: '/invoices/TG-INV-2026-344.pdf' },
