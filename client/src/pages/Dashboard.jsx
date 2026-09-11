@@ -52,6 +52,9 @@ const ACTIVE_PLAN = {
 }
 
 const BILLING_HISTORY = [
+  { id: 8, date: '2026-11-01', month: 'November 2026', plan: 'Business', amount: 45497, status: 'paid', invoiceNo: 'TG-INV-2026-351' },
+  { id: 7, date: '2026-10-01', month: 'October 2026', plan: 'Business', amount: 45497, status: 'paid', invoiceNo: 'TG-INV-2026-350' },
+  { id: 6, date: '2026-09-01', month: 'September 2026', plan: 'Business', amount: 45497, status: 'paid', invoiceNo: 'TG-INV-2026-349' },
   { id: 5, date: '2026-08-11', time: '16:50', month: 'August 2026', plan: 'Business', amount: 17499, status: 'paid', invoiceNo: 'TG-INV-2026-348', pdf: '/invoices/TG-INV-2026-348.pdf' },
   { id: 4, date: '2026-07-01', month: 'July 2026', plan: 'Business', amount: 17499, status: 'paid', invoiceNo: 'TG-INV-2026-345', pdf: '/invoices/TG-INV-2026-345.pdf' },
   { id: 3, date: '2026-06-01', month: 'June 2026', plan: 'Starter', amount: 4999, status: 'paid', invoiceNo: 'TG-INV-2026-344', pdf: '/invoices/TG-INV-2026-344.pdf' },
@@ -966,7 +969,7 @@ function BillingPanel({ onEditAddress }) {
           <CheckCircle2 size={20} />
           <div>
             <strong>Subscription active</strong>
-            <p>Your {activePlanName} plan is active through Aug 31, 2026.</p>
+            <p>Your {activePlanName} plan is active through Nov 30, 2026.</p>
           </div>
         </div>
       )}
